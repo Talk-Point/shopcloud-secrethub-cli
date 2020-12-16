@@ -17,8 +17,7 @@ pip3 install ...
 ### Deploy to PyPi
 
 ```
-$ pip3 install wheel
+$ pip3 install wheel twine
 $ python3 setup.py sdist bdist_wheel
-$ pip3 install twine
 $ twine upload dist/* 
 ```
