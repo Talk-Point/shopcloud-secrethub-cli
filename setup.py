@@ -5,7 +5,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='shopcloud-secrethub',
-    version='1.0.2',
+    version='1.1.0',
     description='CLI tool for the Shopcloud SecretHub',
     long_description_content_type="text/markdown",
     long_description=README,
@@ -15,6 +15,7 @@ setup_args = dict(
     author_email='konstantin.stoldt@talk-point.de',
     keywords=['CLI'],
     url='https://github.com/Talk-Point/shopcloud-secrethub-cli',
+    scripts=['./scripts/secrethub'],
     #download_url='https://pypi.org/project/elastictools/'
 )
 
