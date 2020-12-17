@@ -1,6 +1,6 @@
 # Shopcloud SecretHub CLI
 
-SecretHub CLI Tool for the Secrethub Service
+The SecretHub CLI provides the command-line interface to interact with the SecretHub API.
 
 ## install
 
@@ -8,12 +8,30 @@ SecretHub CLI Tool for the Secrethub Service
 $ pip install shopcloud-secrethub
 ```
 
-### usage
+### Usage
+
+
+__Reading and writing secrets:__  
 
 ```
 $ python3 -m shopcloud-secrethub auth
 $ python3 -m shopcloud-secrethub read <secret-name>
 $ python3 -m shopcloud-secrethub write <secret-name> <value>
+```
+
+
+__Provisioning your applications with secrets:__  
+
+Provision a template file
+
+```
+$ python3 -m shopcloud-secrethub inject -i app.temp.yaml -o app.yaml
+
+# app.temp.yaml
+env_variables:
+  ENV: {{ talk-point/test-repo/env }}
+  SECRET_KEY: {{ talk-point/test-repo/secret_key }}
+
 ```
 
 ### Deploy to PyPi

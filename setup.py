@@ -20,6 +20,8 @@ setup_args = dict(
 
 install_requires = [
     'requests',
+    'Jinja2',
+    'jinja2schema',
 ]
 
 if __name__ == '__main__':

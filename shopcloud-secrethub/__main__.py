@@ -13,13 +13,18 @@ if __name__ == '__main__':
 
     parser_read = subparsers.add_parser('read', help='read a secret')
     parser_read.add_argument('name', type=str, help='secret name')
-    parser_read.add_argument('--output', help='Output Format', choices=['text', 'json'])
+    parser_read.add_argument('--output', '-o', help='Output Format', choices=['text', 'json'])
     parser_read.set_defaults(which='read')
 
     parser_write = subparsers.add_parser('write', help='write a secret')
     parser_write.add_argument('name', type=str, help='secret name')
     parser_write.add_argument('value', type=str, help='secret value')
     parser_write.set_defaults(which='write')
+
+    parser_inject = subparsers.add_parser('inject', help='inject the secrets')
+    parser_inject.add_argument('-i', required=True)
+    parser_inject.add_argument('-o', required=True)
+    parser_inject.set_defaults(which='inject')
 
     args = parser.parse_args()
     cli.main(args)
