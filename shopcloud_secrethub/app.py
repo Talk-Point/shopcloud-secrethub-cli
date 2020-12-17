@@ -34,13 +34,15 @@ class App:
         self.config = ConfigFile(path)
         self.endpoint = kwargs.get('endpoint', 'shopcloud-secrethub.ey.r.appspot.com')
 
-    def read(self, secretname) -> List:
+    def read(self, secretname, **kwargs) -> List:
+        headers = {
+            'Authorization': self.config.token,
+            'User-Agent': kwargs.get('user_agent', 'secrethub-cli'),
+            'User-App': kwargs.get('user_app')
+        }
         response = requests.get(
             f'https://{self.endpoint}/hub/api/secrets',
-            headers={
-                'Authorization': self.config.token,
-                'User-Agent': 'secrethub-cli',
-            },
+            headers=headers,
             params={
                 'q': secretname,
             }
@@ -51,13 +53,15 @@ class App:
 
         return response.json().get('results', [])
 
-    def write(self, secretname, value):
+    def write(self, secretname, value, **kwargs):
+        headers = {
+            'Authorization': self.config.token,
+            'User-Agent': kwargs.get('user_agent', 'secrethub-cli'),
+            'User-App': kwargs.get('user_app')
+        }
         response = requests.post(
             f'https://{self.endpoint}/hub/api/secrets/write/',
-            headers={
-                'Authorization': self.config.token,
-                'User-Agent': 'secrethub-cli',
-            },
+            headers=headers,
             json={
                 'name': secretname,
                 'value': value
@@ -67,17 +71,22 @@ class App:
 
 
 class SecretHub:
-    def __init__(self):
+    def __init__(self, **kwargs):
         path = os.path.expanduser('~/.secrethub')
         self.app = App(path)
         self.secrets = {}
+        self.user_app = kwargs.get('user_app')
 
     def read(self, secretname: str):
         secret = self.secrets.get(secretname)
         if secret is not None:
             return secret.get('value')
         
-        secrets = self.app.read(secretname)
+        secrets = self.app.read(
+            secretname, 
+            user_agent='secrethub-code',
+            user_app=self.user_app
+        )
         if len(secrets) == 0:
             return None
         secret = secrets[0]
