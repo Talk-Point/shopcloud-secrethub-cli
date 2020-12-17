@@ -46,6 +46,14 @@ env_variables:
 
 ```
 
+__in Code:__  
+
+```py
+from shopcloud_secrethub import SecretHub
+hub = SecretHub()
+hub.read('talk-point/test-repo/secret_key')
+```
+
 ### Deploy to PyPi
 
 ```sh
