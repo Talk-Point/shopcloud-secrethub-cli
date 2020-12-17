@@ -13,7 +13,7 @@ $ pip install shopcloud-secrethub
 
 __Reading and writing secrets:__  
 
-```
+```sh
 $ python3 -m shopcloud-secrethub auth
 $ python3 -m shopcloud-secrethub read <secret-name>
 $ python3 -m shopcloud-secrethub write <secret-name> <value>
@@ -24,7 +24,7 @@ __Provisioning your applications with secrets:__
 
 Provision a template file
 
-```
+```sh
 $ python3 -m shopcloud-secrethub inject -i app.temp.yaml -o app.yaml
 
 # app.temp.yaml
@@ -36,7 +36,7 @@ env_variables:
 
 ### Deploy to PyPi
 
-```
+```sh
 $ pip3 install wheel twine
 $ python3 setup.py sdist bdist_wheel
 $ twine upload dist/* 
