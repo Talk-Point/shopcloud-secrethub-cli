@@ -16,7 +16,6 @@ setup_args = dict(
     keywords=['CLI'],
     url='https://github.com/Talk-Point/shopcloud-secrethub-cli',
     scripts=['./scripts/secrethub'],
-    #download_url='https://pypi.org/project/elastictools/'
 )
 
 install_requires = [
