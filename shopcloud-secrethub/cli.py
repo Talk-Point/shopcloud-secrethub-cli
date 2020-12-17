@@ -25,7 +25,7 @@ def main(args):
     elif command == 'write':
         app = App(path)
         app.write(args.name, args.value)
-    elif command == 'inject':
+    elif command == 'inject' or command == 'printenv':
         app = App(path)
 
         with open(args.i) as f:
@@ -38,7 +38,7 @@ def main(args):
 
         variables = [extract(x) for x in re.findall('{{.*}}', template)]
 
-        if args.o == 'env':
+        if command == 'printenv':
             for _, key, value in variables:
                 print(f"export {key}=\"{value}\"")
         else:

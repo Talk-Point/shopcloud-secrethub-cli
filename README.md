@@ -37,7 +37,7 @@ env_variables:
 Provision to the environment
 
 ```sh
-$ eval `python -m shopcloud-secrethub inject -i app.temp.yaml -o env`
+$ eval `python -m shopcloud-secrethub printenv -i app.temp.yaml`
 
 # app.temp.yaml
 env_variables:
