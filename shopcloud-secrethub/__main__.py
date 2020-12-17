@@ -27,5 +27,9 @@ if __name__ == '__main__':
     parser_inject.add_argument('-o', required=True)
     parser_inject.set_defaults(which='inject')
 
+    parser_printenv = subparsers.add_parser('printenv', help='print as env export')
+    parser_printenv.add_argument('-i', required=True)
+    parser_printenv.set_defaults(which='printenv')
+
     args = parser.parse_args()
     cli.main(args)
