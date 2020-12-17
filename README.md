@@ -14,9 +14,9 @@ $ pip install shopcloud-secrethub
 __Reading and writing secrets:__  
 
 ```sh
-$ python3 -m shopcloud-secrethub auth
-$ python3 -m shopcloud-secrethub read <secret-name>
-$ python3 -m shopcloud-secrethub write <secret-name> <value>
+$ secrethub auth
+$ secrethub read <secret-name>
+$ secrethub write <secret-name> <value>
 ```
 
 
@@ -25,7 +25,7 @@ __Provisioning your applications with secrets:__
 Provision a template file
 
 ```sh
-$ python3 -m shopcloud-secrethub inject -i app.temp.yaml -o app.yaml
+$ secrethub inject -i app.temp.yaml -o app.yaml
 
 # app.temp.yaml
 env_variables:
@@ -37,7 +37,7 @@ env_variables:
 Provision to the environment
 
 ```sh
-$ eval `python -m shopcloud-secrethub printenv -i app.temp.yaml`
+$ eval `secrethub printenv -i app.temp.yaml`
 
 # app.temp.yaml
 env_variables:
