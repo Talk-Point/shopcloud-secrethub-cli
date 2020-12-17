@@ -1,5 +1,4 @@
 import configparser
-import getpass
 import requests
 from typing import List
 
@@ -34,7 +33,7 @@ class App:
     def __init__(self, path, **kwargs):
         self.config = ConfigFile(path)
         self.endpoint = kwargs.get('endpoint', 'shopcloud-secrethub.ey.r.appspot.com')
-    
+
     def read(self, secretname) -> List:
         response = requests.get(
             f'https://{self.endpoint}/hub/api/secrets',

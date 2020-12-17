@@ -1,6 +1,8 @@
-import json, os, re
+import json
+import os
+import re
+import getpass
 from .app import App, ConfigFile
-        
 
 
 def main(args):
@@ -41,4 +43,3 @@ def main(args):
 
         with open(args.o, 'w') as writer:
             writer.write(template)
-
