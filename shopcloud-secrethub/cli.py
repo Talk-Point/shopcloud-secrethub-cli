@@ -50,7 +50,24 @@ class App:
             }
         )
 
+        if not (200 <= response.status_code <= 299):
+            raise Exception('API wrong answer')
+
         return response.json().get('results', [])
+
+    def write(self, secretname, value):
+        response = requests.post(
+            f'https://{self.endpoint}/hub/api/secrets/write/',
+            headers={
+                'Authorization': self.config.token,
+                'User-Agent': 'secrethub-cli',
+            },
+            json={
+                'name': secretname,
+                'value': value
+            }
+        )
+        return response.json()
         
 
 
@@ -72,7 +89,8 @@ def main(args):
             for secret in secrets:
                 print(secret)
     elif command == 'write':
-        print('write')
+        app = App(path)
+        app.write(args.name, args.value)
     elif command == 'inject':
         print('inject')
     else:

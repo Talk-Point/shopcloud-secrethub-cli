@@ -8,13 +8,18 @@ if __name__ == '__main__':
     )
 
     subparsers = parser.add_subparsers(help='authentication', title='auth')
-    parser_a = subparsers.add_parser('auth', help='generate auth file')
-    parser_a.set_defaults(which='auth')
+    parser_auth = subparsers.add_parser('auth', help='generate auth file')
+    parser_auth.set_defaults(which='auth')
 
-    parser_b = subparsers.add_parser('read', help='read a secret')
-    parser_b.add_argument('name', type=str, help='secret name')
-    parser_b.add_argument('--output', help='Output Format', choices=['text', 'json'])
-    parser_b.set_defaults(which='read')
+    parser_read = subparsers.add_parser('read', help='read a secret')
+    parser_read.add_argument('name', type=str, help='secret name')
+    parser_read.add_argument('--output', help='Output Format', choices=['text', 'json'])
+    parser_read.set_defaults(which='read')
+
+    parser_write = subparsers.add_parser('write', help='write a secret')
+    parser_write.add_argument('name', type=str, help='secret name')
+    parser_write.add_argument('value', type=str, help='secret value')
+    parser_write.set_defaults(which='write')
 
     args = parser.parse_args()
     cli.main(args)
