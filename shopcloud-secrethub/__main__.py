@@ -7,7 +7,8 @@ if __name__ == '__main__':
         prog='shopcloud-secrethub'
     )
 
-    subparsers = parser.add_subparsers(help='authentication', title='auth')
+    subparsers = parser.add_subparsers(help='commands', title='commands')
+
     parser_auth = subparsers.add_parser('auth', help='generate auth file')
     parser_auth.set_defaults(which='auth')
 
