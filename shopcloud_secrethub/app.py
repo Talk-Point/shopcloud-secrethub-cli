@@ -1,7 +1,7 @@
 import configparser
 import requests
 from typing import List
-
+import os
 
 class ConfigFile:
     def __init__(self, path):
@@ -64,3 +64,22 @@ class App:
             }
         )
         return response.json()
+
+
+class SecretHub:
+    def __init__(self):
+        path = os.path.expanduser('~/.secrethub')
+        self.app = App(path)
+        self.secrets = {}
+
+    def read(self, secretname: str):
+        secret = self.secrets.get(secretname)
+        if secret is not None:
+            return secret.get('value')
+        
+        secrets = self.app.read(secretname)
+        if len(secrets) == 0:
+            return None
+        secret = secrets[0]
+        self.secrets[secret.get('name')] = secret
+        return secrets[0].get('value')
