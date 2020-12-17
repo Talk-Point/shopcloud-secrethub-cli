@@ -92,6 +92,4 @@ def main(args):
         app = App(path)
         app.write(args.name, args.value)
     elif command == 'inject':
-        print('inject')
-    else:
-        print('No command')
+        print('not implemented yet')

@@ -11,7 +11,9 @@ pip3 install ...
 ### usage
 
 ```
-
+$ python3 -m shopcloud-secrethub auth
+$ python3 -m shopcloud-secrethub read <secret-name>
+$ python3 -m shopcloud-secrethub write <secret-name> <value>
 ```
 
 ### Deploy to PyPi
