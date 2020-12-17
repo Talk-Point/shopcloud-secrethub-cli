@@ -34,6 +34,18 @@ env_variables:
 
 ```
 
+Provision to the environment
+
+```sh
+$ eval `python -m shopcloud-secrethub inject -i app.temp.yaml -o env`
+
+# app.temp.yaml
+env_variables:
+  ENV: {{ talk-point/test-repo/env }}
+  SECRET_KEY: {{ talk-point/test-repo/secret_key }}
+
+```
+
 ### Deploy to PyPi
 
 ```sh
