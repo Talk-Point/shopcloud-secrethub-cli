@@ -26,7 +26,8 @@ jobs:
         python setup.py install
     - name: check package runned
       run: |
-        python -m shopcloud-secrethub --help
+        python -m shopcloud_secrethub --help
+        secrethub --help
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
