@@ -5,7 +5,7 @@ The SecretHub CLI provides the command-line interface to interact with the Secre
 ## install
 
 ```
-$ pip install shopcloud-secrethub
+$ pip install shopcloud_secrethub
 ```
 
 ### Usage
