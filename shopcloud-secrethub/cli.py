@@ -3,6 +3,7 @@ import getpass
 import os
 import requests
 from typing import List
+import json
 
 
 class ConfigFile:
@@ -12,12 +13,10 @@ class ConfigFile:
         self._load()
 
     def _load(self):
-        try:
-            self.config = configparser.ConfigParser()
-            self.config.read(self.path)
-            self.config['default']
-        except Exception as e:
-            print("can not load token. init with auth command")
+        self.config = configparser.ConfigParser()
+        self.config.read(self.path)
+        if 'default' not in self.config:
+            raise Exception(f'Error loading file {self.path} use auth to generate')
 
     @property
     def token(self):
@@ -87,7 +86,7 @@ def main(args):
                 print(f"{secret.get('name')}={value}")
         elif args.output == 'json':
             for secret in secrets:
-                print(secret)
+                print(json.dumps(secret))
     elif command == 'write':
         app = App(path)
         app.write(args.name, args.value)

@@ -1,11 +1,11 @@
 # Shopcloud SecretHub CLI
 
-SecretHub CLI Tool
+SecretHub CLI Tool for the Secrethub Service
 
 ## install
 
 ```
-pip3 install ...
+$ pip install shopcloud-secrethub
 ```
 
 ### usage
