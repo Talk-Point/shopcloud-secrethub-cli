@@ -44,7 +44,10 @@ def main(args):
         def extract(x):
             name = x.replace("{{", '').replace('}}', '').strip()
             secrets = app.read(name, user_app=username)
-            return (x, "".join(name.split('/')[2:]).upper().replace('-', '_'), secrets[0].get('value'))
+            if len(secrets) == 0:
+                raise Exception("Secret not found {}".format(name))
+            key_s = "/".join(name.split('/')[-1:]).upper().replace('/', '_').replace('-', '_')
+            return (x, key_s, secrets[0].get('value'))
 
         variables = [extract(x) for x in re.findall('{{.*}}', template)]
 
