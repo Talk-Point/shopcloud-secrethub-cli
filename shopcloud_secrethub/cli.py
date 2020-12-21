@@ -56,6 +56,6 @@ def main(args):
                 print(f"export {key}=\"{value}\"")
         else:
             for key, _, value in variables:
-                template = template.replace(key, value)
+                template = template.replace(key, f"\"{value}\"")
             with open(args.o, 'w') as writer:
                 writer.write(template)
