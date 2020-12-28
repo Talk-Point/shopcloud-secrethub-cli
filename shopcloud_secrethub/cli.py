@@ -53,6 +53,7 @@ def main(args):
 
         if command == 'printenv':
             for _, key, value in variables:
+                value = value.replace('$', '\$')
                 print(f"export {key}=\"{value}\"")
         else:
             for key, _, value in variables:
