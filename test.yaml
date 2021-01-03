@@ -1,0 +1,1 @@
+talk-point/test-repo/file-as-secret=env_variables:\n  ENV: {{ talk-point/test-repo/env }}\n  SECRET_KEY: {{ talk-point/test-repo/secret_key }}
