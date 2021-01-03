@@ -45,7 +45,7 @@ def main(args):
                 app.write(args.name, s, user_app=username)
         else:
             if args.value is None:
-                raise Excpetion("value must set")
+                raise Exception("value must set")
             app.write(args.name, args.value, user_app=username)
     elif command == 'inject' or command == 'printenv':
         app = App(path)
@@ -57,7 +57,7 @@ def main(args):
             name = x.replace("{{", '').replace('}}', '').strip()
             secrets = app.read(name, user_app=username)
             if len(secrets) == 0:
-                raise Exception("Secret not found {}".format(name))
+                raise AttributeError("Secret not found {}".format(name))
             key_s = "/".join(name.split('/')[-1:]).upper().replace('/', '_').replace('-', '_')
             return (x, key_s, secrets[0].get('value'))
 

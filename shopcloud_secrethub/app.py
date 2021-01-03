@@ -74,7 +74,6 @@ class App:
         )
 
         if not (200 <= response.status_code <= 299):
-            print(response.status_code, response.content)
             raise Exception('API wrong answer')
 
         return response.json()
