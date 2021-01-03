@@ -29,12 +29,24 @@ def main(args):
             for secret in secrets:
                 value = secret.get('value').encode('unicode_escape').decode('utf-8')
                 print(f"{secret.get('name')}={value}")
+        elif args.output == 'raw':
+            for secret in secrets:
+                value = secret.get('value').encode('unicode_escape').decode('utf-8')
+                print(value.replace('\\n', "\n"))
         elif args.output == 'json':
             for secret in secrets:
                 print(json.dumps(secret))
     elif command == 'write':
         app = App(path)
-        app.write(args.name, args.value, user_app=username)
+
+        if args.in_file is not None:
+            with open(args.in_file) as f: 
+                s = f.read()
+                app.write(args.name, s, user_app=username)
+        else:
+            if args.value is None:
+                raise Excpetion("value must set")
+            app.write(args.name, args.value, user_app=username)
     elif command == 'inject' or command == 'printenv':
         app = App(path)
 
