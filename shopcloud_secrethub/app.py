@@ -3,21 +3,26 @@ import requests
 from typing import List
 import os
 
+
 class ConfigFile:
-    def __init__(self, path):
+    def __init__(self, path, **kwargs):
         self.path = path
-        self.config = None
-        self._load()
+        self._token = kwargs.get('api_token')
+
+        if self._token is None:
+            self._load()
 
     def _load(self):
-        self.config = configparser.ConfigParser()
-        self.config.read(self.path)
-        if 'default' not in self.config:
+        config = configparser.ConfigParser()
+        config.read(self.path)
+        if 'default' not in config:
             raise Exception(f'Error loading file {self.path} use auth to generate')
+
+        self._token = config['default']['token']
 
     @property
     def token(self):
-        return self.config['default']['token']
+        return self._token
 
     @staticmethod
     def generate(path: str, token: str):
@@ -31,9 +36,9 @@ class ConfigFile:
 
 class App:
     def __init__(self, path, **kwargs):
-        self.config = ConfigFile(path)
+        self.config = ConfigFile(path, api_token=kwargs.get('api_token'))
         self.endpoint = kwargs.get('endpoint', 'shopcloud-secrethub.ey.r.appspot.com')
-
+    
     def read(self, secretname, **kwargs) -> List:
         headers = {
             'Authorization': self.config.token,
@@ -78,7 +83,7 @@ class App:
 class SecretHub:
     def __init__(self, **kwargs):
         path = os.path.expanduser('~/.secrethub')
-        self.app = App(path)
+        self.app = App(path, api_token=kwargs.get('api_token'))
         self.secrets = {}
         self.user_app = kwargs.get('user_app')
 
