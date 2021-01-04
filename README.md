@@ -50,7 +50,7 @@ __in Code:__
 
 ```py
 from shopcloud_secrethub import SecretHub
-hub = SecretHub(user_app="test-script")
+hub = SecretHub(user_app="test-script", api_token='<TOKEN>')
 hub.read('talk-point/test-repo/secret_key')
 ```
 
