@@ -10,9 +10,17 @@ class ConfigFile:
         self._token = kwargs.get('api_token')
 
         if self._token is None:
-            self._load()
+            self._load_from_env()
+            if self._token is None:
+                self._load_from_config()
+        print(self._token)
 
-    def _load(self):
+    def _load_from_env(self):
+        token = os.environ.get('SECRETHUB_TOKEN')
+        if token is not None:
+            self._token = token
+
+    def _load_from_config(self):
         config = configparser.ConfigParser()
         config.read(self.path)
         if 'default' not in config:
