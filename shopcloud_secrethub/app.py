@@ -13,7 +13,6 @@ class ConfigFile:
             self._load_from_env()
             if self._token is None:
                 self._load_from_config()
-        print(self._token)
 
     def _load_from_env(self):
         token = os.environ.get('SECRETHUB_TOKEN')
