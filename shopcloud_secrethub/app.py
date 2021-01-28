@@ -28,7 +28,9 @@ class ConfigFile:
         self._token = config['default']['token']
 
     @property
-    def token(self):
+    def token(self) -> str:
+        if self._token is None:
+            raise Exception('No Auth Token exists')
         return self._token
 
     @staticmethod
