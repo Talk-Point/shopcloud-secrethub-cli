@@ -50,7 +50,7 @@ class App:
     
     def read(self, secretname, **kwargs) -> List:
         headers = {
-            'Authorization': self.config.token,
+            'Authorization': self.config.token.trim(),
             'User-Agent': kwargs.get('user_agent', 'secrethub-cli'),
             'User-App': kwargs.get('user_app')
         }
