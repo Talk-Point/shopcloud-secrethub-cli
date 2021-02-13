@@ -61,7 +61,6 @@ class App:
                 'q': secretname,
             }
         )
-
         if not (200 <= response.status_code <= 299):
             raise Exception('API wrong answer')
 
@@ -106,7 +105,7 @@ class SecretHub:
             user_app=self.user_app
         )
         if len(secrets) == 0:
-            return None
+            raise Exception('can not access secret `{}`'.format(secretname))
         secret = secrets[0]
         self.secrets[secret.get('name')] = secret
         return secrets[0].get('value')

@@ -25,6 +25,8 @@ def main(args):
     elif command == 'read':
         app = App(path)
         secrets = app.read(args.name, user_app=username)
+        if len(secrets) == 0:
+            raise Exception('can not access secret `{}`'.format(args.name))
         if args.output is None:
             for secret in secrets:
                 value = secret.get('value').encode('unicode_escape').decode('utf-8')
