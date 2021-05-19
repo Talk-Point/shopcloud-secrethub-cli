@@ -55,7 +55,7 @@ class App:
             'User-App': kwargs.get('user_app')
         }
         response = requests.get(
-            f'https://{self.endpoint}/hub/api/secrets',
+            f'https://{self.endpoint}/hub/api/secrets/',
             headers=headers,
             params={
                 'q': secretname,
