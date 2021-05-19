@@ -5,7 +5,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='shopcloud_secrethub',
-    version='2.8.2',
+    version='2.8.4',
     description='CLI tool for the Shopcloud SecretHub',
     long_description_content_type="text/markdown",
     long_description=README,
